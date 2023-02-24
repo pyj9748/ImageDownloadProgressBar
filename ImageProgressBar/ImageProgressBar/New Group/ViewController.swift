@@ -8,13 +8,14 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    let mainView = MainView(frame: .zero)
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
-        // Do any additional setup after loading the view.
     }
-
+    
+    override func loadView() {
+        self.view = mainView
+    }
 
 }
 
