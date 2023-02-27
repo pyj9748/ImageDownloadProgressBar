@@ -8,7 +8,6 @@ import SnapKit
 import UIKit
 
 final class ImageDownloadView: UIView {
-    let hStackView = UIStackView(frame: .zero)
     let imageView = UIImageView(frame: .zero)
     let progressBar = UIProgressView(frame: .zero)
     let downLoadButton = UIButton(frame: .zero)
@@ -25,43 +24,49 @@ final class ImageDownloadView: UIView {
     }
     
     func configuration() {
-        hStackView.axis = .horizontal
-        hStackView.distribution = .fill
-        hStackView.spacing = 10
-        hStackView.alignment = .center
         downLoadButton.backgroundColor = .systemBlue
         downLoadButton.setTitle("Load", for: .normal)
         downLoadButton.clipsToBounds = true
         downLoadButton.layer.cornerRadius = 12
         imageView.image = UIImage(systemName: "photo.fill")
-        
+        imageView.contentMode = .scaleAspectFit
+        progressBar.progressViewStyle = .default
+        progressBar.progressTintColor = .green
+        progressBar.trackTintColor = .lightGray
     }
     
     func addSubviews() {
         [imageView, progressBar, downLoadButton].forEach {
-            hStackView.addArrangedSubview($0)
+            self.addSubview($0)
         }
-        addSubview(hStackView)
+        
     }
     
     func makeConstraints() {
         
-        hStackView.snp.makeConstraints { make in
-            make.trailing.equalTo(safeAreaLayoutGuide.snp.trailing).offset(-10)
-            make.leading.equalTo(safeAreaLayoutGuide.snp.leading).offset(10)
+        self.snp.makeConstraints { make in
+            make.leading.equalTo(safeAreaLayoutGuide.snp.leading)
+            make.trailing.equalTo(safeAreaLayoutGuide.snp.trailing)
             make.height.equalTo(100)
         }
         imageView.snp.makeConstraints { make in
+            make.leading.equalToSuperview().offset(10)
+            make.width.equalTo(120)
+            make.centerY.equalToSuperview()
             make.height.equalTo(90)
-            make.width.equalTo(120)
-        }
-        progressBar.snp.makeConstraints { make in
-            make.height.equalTo(100)
-            make.width.equalTo(120)
+            
         }
         downLoadButton.snp.makeConstraints { make in
+            make.trailing.equalToSuperview().offset(-10)
+            make.centerY.equalToSuperview()
             make.height.equalTo(40)
-            make.width.equalTo(80)
+            make.width.equalTo(100)
+        }
+        progressBar.snp.makeConstraints { make in
+            make.leading.equalTo(imageView.snp.trailing)
+            make.trailing.equalTo(downLoadButton.snp.leading).offset(-10)
+            make.centerY.equalToSuperview()
+            ///make.height.equalTo(20)
         }
     }
 }
