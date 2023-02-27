@@ -29,12 +29,11 @@ final class ImageDownloadView: UIView {
         hStackView.distribution = .fill
         hStackView.spacing = 10
         hStackView.alignment = .center
-        imageView.backgroundColor = .red
-        progressBar.backgroundColor = .blue
         downLoadButton.backgroundColor = .systemBlue
         downLoadButton.setTitle("Load", for: .normal)
         downLoadButton.clipsToBounds = true
         downLoadButton.layer.cornerRadius = 12
+        imageView.image = UIImage(systemName: "photo.fill")
         
     }
     
