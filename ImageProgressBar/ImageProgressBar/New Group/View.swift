@@ -16,6 +16,7 @@ final class MainView: UIView {
     let imageDownloadView4 = ImageDownloadView(frame: .zero)
     let imageDownloadView5 = ImageDownloadView(frame: .zero)
     let allImageDownloadButton = UIButton(frame: .zero)
+    let allImageInitailizeButton = UIButton(frame: .zero)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -38,6 +39,10 @@ final class MainView: UIView {
         allImageDownloadButton.layer.cornerRadius = 12
         allImageDownloadButton.clipsToBounds = true
         allImageDownloadButton.setTitle("Load All Images", for: .normal)
+        allImageInitailizeButton.backgroundColor = .systemBlue
+        allImageInitailizeButton.layer.cornerRadius = 12
+        allImageInitailizeButton.clipsToBounds = true
+        allImageInitailizeButton.setTitle("remove All Images", for: .normal)
     }
     
     func addSubviews() {
@@ -45,7 +50,7 @@ final class MainView: UIView {
         ].forEach {
             vStackView.addArrangedSubview($0)
         }
-        [vStackView, allImageDownloadButton].forEach {
+        [vStackView, allImageDownloadButton, allImageInitailizeButton].forEach {
             addSubview($0)
         }
 
@@ -60,6 +65,12 @@ final class MainView: UIView {
         }
         allImageDownloadButton.snp.makeConstraints { make in
             make.top.equalTo(vStackView.snp.bottom).offset(20)
+            make.centerX.equalTo(vStackView.snp.centerX)
+            make.height.equalTo(60)
+            make.width.equalTo(150)
+        }
+        allImageInitailizeButton.snp.makeConstraints { make in
+            make.top.equalTo(allImageDownloadButton.snp.bottom).offset(20)
             make.centerX.equalTo(vStackView.snp.centerX)
             make.height.equalTo(60)
             make.width.equalTo(150)

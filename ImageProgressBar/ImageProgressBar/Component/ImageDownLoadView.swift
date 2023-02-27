@@ -23,7 +23,7 @@ final class ImageDownloadView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func configuration() {
+    private func configuration() {
         downLoadButton.backgroundColor = .systemBlue
         downLoadButton.setTitle("Load", for: .normal)
         downLoadButton.clipsToBounds = true
@@ -33,16 +33,17 @@ final class ImageDownloadView: UIView {
         progressBar.progressViewStyle = .default
         progressBar.progressTintColor = .green
         progressBar.trackTintColor = .lightGray
+        progressBar.setProgress(0.0, animated: false)
     }
     
-    func addSubviews() {
+    private func addSubviews() {
         [imageView, progressBar, downLoadButton].forEach {
             self.addSubview($0)
         }
         
     }
     
-    func makeConstraints() {
+    private func makeConstraints() {
         
         self.snp.makeConstraints { make in
             make.leading.equalTo(safeAreaLayoutGuide.snp.leading)
@@ -66,7 +67,28 @@ final class ImageDownloadView: UIView {
             make.leading.equalTo(imageView.snp.trailing)
             make.trailing.equalTo(downLoadButton.snp.leading).offset(-10)
             make.centerY.equalToSuperview()
-            ///make.height.equalTo(20)
+        }
+    }
+    
+    func initailze() {
+        imageView.image = UIImage(systemName: "photo.fill")
+        progressBar.setProgress(0.0, animated: false)
+    }
+    
+    func fetchImage(urlString: String) {
+        guard let url = URL(string: urlString) else {
+            print("Bad Image URL")
+            return
+        }
+        DispatchQueue.global().async {
+            guard let data = try? Data(contentsOf: url) else {
+                print(" url To data Error")
+                return
+            }
+            DispatchQueue.main.async {
+                self.imageView.image = UIImage(data: data)
+                self.progressBar.setProgress(1.0, animated: false)
+            }
         }
     }
 }
