@@ -5,8 +5,8 @@
 //  Created by young june Park on 2023/02/22.
 //
 
-import UIKit
 import SnapKit
+import UIKit
 
 final class MainView: UIView {
     private let vStackView = UIStackView(frame: .zero)
@@ -17,18 +17,18 @@ final class MainView: UIView {
     let imageDownloadView5 = ImageDownloadView(frame: .zero)
     let allImageDownloadButton = UIButton(frame: .zero)
     let allImageInitailizeButton = UIButton(frame: .zero)
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         configuration()
         addSubviews()
         makeConstraints()
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     func configuration() {
         backgroundColor = .white
         vStackView.axis = .vertical
@@ -44,7 +44,7 @@ final class MainView: UIView {
         allImageInitailizeButton.clipsToBounds = true
         allImageInitailizeButton.setTitle("remove All Images", for: .normal)
     }
-    
+
     func addSubviews() {
         [imageDownloadView1, imageDownloadView2, imageDownloadView3, imageDownloadView4, imageDownloadView5,
         ].forEach {
@@ -53,9 +53,8 @@ final class MainView: UIView {
         [vStackView, allImageDownloadButton, allImageInitailizeButton].forEach {
             addSubview($0)
         }
-
     }
-    
+
     func makeConstraints() {
         vStackView.snp.makeConstraints { make in
             make.top.equalTo(safeAreaLayoutGuide.snp.top)
@@ -76,5 +75,4 @@ final class MainView: UIView {
             make.width.equalTo(150)
         }
     }
-    
 }
